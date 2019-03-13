@@ -8,8 +8,7 @@ public class DriverExam {
 	}
 	public boolean passed(char[] studentAnswers)
 	{
-		double passedPercent = 0;
-		passedPercent = (double)totalCorrect(studentAnswers)/studentAnswers.length;
+		double passedPercent = (double)totalCorrect(studentAnswers)/studentAnswers.length;
 		if (passedPercent < 0.75)
 		{
 			return false;
@@ -21,15 +20,15 @@ public class DriverExam {
 	}
 	public int totalCorrect(char[] studentAnswers)
 	{
-		int totalCorrect = 0;
+		int numCorrect = 0;
 		for(int i = 0; i < studentAnswers.length; i++)
 		{
 			if(studentAnswers[i] == correctAnswers[i])
 			{
-				totalCorrect += 1;
+				numCorrect += 1;
 			}
 		}
-		return totalCorrect;
+		return numCorrect;
 	}
 	public int totalIncorrect(char[] studentAnswers)
 	{
@@ -45,16 +44,15 @@ public class DriverExam {
 	}
 	public int[] questionsMissed(char[] studentAnswers)
 	{
-		int[] questionsMissed = new int[studentAnswers.length - 1];
-		for(int i = 1; i < studentAnswers.length; i++)
+		int size = totalIncorrect(studentAnswers);
+		int[] questionsMissed = new int[size];
+		int j = 0;
+		for(int i = 0; i < studentAnswers.length; i++)
 		{
 			if(studentAnswers[i] != correctAnswers[i])
 			{
-				questionsMissed[i] = 0;  
-			}
-			else
-			{
-				questionsMissed[i] = 1;
+				questionsMissed[j] = i+1;  
+				j++;
 			}
 		}
 		return questionsMissed;
